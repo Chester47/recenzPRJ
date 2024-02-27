@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.entity.Game;
 import com.example.demo.service.GameService;
 import lombok.Data;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -12,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class GameController {
 
-    
+
     private final GameService gameService;
 
     @PostMapping("/getAllGames")
@@ -26,17 +29,18 @@ public class GameController {
         gameService.saveGame(randomGame);
         return randomGame;
     }
+
     @PostMapping("/searchGameByTitle")
     public List<Game> searchGameByTitle(@RequestParam String title) {
         return gameService.getGamesByTitle(title);
     }
 
-    @DeleteMapping("/deleteGameByTitle")
+    @PostMapping("/deleteGameByTitle")
     public void deleteGameByTitle(@RequestParam String title) {
         gameService.deleteGameByTitle(title);
     }
 
-    @DeleteMapping("/clearAllGame")
+    @PostMapping("/clearAllGame")
     public void clearAllGames() {
         gameService.clearAllGames();
     }
