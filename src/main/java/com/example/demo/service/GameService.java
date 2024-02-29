@@ -22,11 +22,10 @@ public class GameService {
     }
 
     public Game generateRandomGame() {
-        // Реализация генерации случайной игры
+
         Game game = new Game();
         game.setId(UUID.randomUUID());
 
-        // Выбираем случайное название из массива possibleTitles
         Random random = new Random();
         int randomIndex = random.nextInt(possibleTitles.length);
         String randomTitle = possibleTitles[randomIndex];

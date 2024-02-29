@@ -19,20 +19,20 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @PostMapping("/reviewGame")
+    @PostMapping("/review/create")
 
     public Review createReview(@RequestBody CreateReviewRequest request) {
         Review createdReview = reviewService.createReview(request);
         return createdReview;
     }
 
-    @PostMapping("/reviews/update")
+    @PostMapping("/review/update")
     public ResponseEntity<String> updateReview(@RequestBody UpdateReviewRequest request) {
         reviewService.updateReview(request);
         return new ResponseEntity<>("Review updated successfully", HttpStatus.OK);
     }
 
-    @PostMapping("/deleteLast")
+    @PostMapping("/review/deleteLast")
     public ResponseEntity<String> deleteLastReview() {
         reviewService.deleteLastReview();
         return ResponseEntity.ok("Last review deleted successfully");

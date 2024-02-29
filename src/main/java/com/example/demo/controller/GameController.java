@@ -18,29 +18,29 @@ public class GameController {
 
     private final GameService gameService;
 
-    @PostMapping("/getAllGames")
+    @PostMapping("/games")
     public List<Game> getAllGames() {
         return gameService.getAllGames();
     }
 
-    @PostMapping("/generateGame")
+    @PostMapping("/game/generate")
     public Game generateAndSaveRandomGame() {
         Game randomGame = gameService.generateRandomGame();
         gameService.saveGame(randomGame);
         return randomGame;
     }
 
-    @PostMapping("/searchGameByTitle")
+    @PostMapping("/game/searchByTitle")
     public List<Game> searchGameByTitle(@RequestParam String title) {
         return gameService.getGamesByTitle(title);
     }
 
-    @PostMapping("/deleteGameByTitle")
+    @PostMapping("/game/deleteByTitle")
     public void deleteGameByTitle(@RequestParam String title) {
         gameService.deleteGameByTitle(title);
     }
 
-    @PostMapping("/clearAllGame")
+    @PostMapping("/games/clear")
     public void clearAllGames() {
         gameService.clearAllGames();
     }
