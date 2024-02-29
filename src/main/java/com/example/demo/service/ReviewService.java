@@ -4,7 +4,7 @@ import com.example.demo.controller.rq.CreateReviewRequest;
 import com.example.demo.controller.rq.UpdateReviewRequest;
 import com.example.demo.entity.Game;
 import com.example.demo.entity.Review;
-import com.example.demo.repository.Exception.GameNotFoundException;
+import com.example.demo.exception.GameNotFoundException;
 import com.example.demo.repository.GameRepository;
 import com.example.demo.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,7 @@ public class ReviewService {
                 -> new GameNotFoundException("Game not found"));
         review.setGame(game);
 
-        Review savedReview = reviewRepository.save(review);
-        return savedReview;
+        return reviewRepository.save(review);
     }
 
     public void updateReview(UpdateReviewRequest request) {

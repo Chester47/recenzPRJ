@@ -4,7 +4,7 @@ import com.example.demo.controller.rq.CreateReviewRequest;
 import com.example.demo.controller.rq.UpdateReviewRequest;
 import com.example.demo.entity.Review;
 import com.example.demo.service.ReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/reviews")
+@RequiredArgsConstructor
 public class ReviewController {
 
-    @Autowired
-    private ReviewService reviewService;
+
+    private final ReviewService reviewService;
 
     @PostMapping("/review/create")
 
     public Review createReview(@RequestBody CreateReviewRequest request) {
-        Review createdReview = reviewService.createReview(request);
-        return createdReview;
+        return reviewService.createReview(request);
     }
 
     @PostMapping("/review/update")
