@@ -2,11 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Game;
 import com.example.demo.service.GameService;
+import jakarta.websocket.server.PathParam;
 import lombok.Data;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,10 +22,12 @@ public class GameController {
     }
 
     @PostMapping("/game/generate")
-    public Game generateAndSaveRandomGame() {
-        Game randomGame = gameService.generateRandomGame();
-        gameService.saveGame(randomGame);
-        return randomGame;
+    public List<Game> generateAndSaveRandomGame() {
+        return gameService.generateRandomGames(100);
+    }
+    @PostMapping("games/searchByParial")
+    public List<Game> searchByPartialForTitles(@PathParam("partial")String partial) {
+        return gameService.searchGameByPartialForTitle(partial);
     }
 
     @PostMapping("/game/searchByTitle")

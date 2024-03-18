@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/reviews")
 @RequiredArgsConstructor
@@ -24,6 +26,10 @@ public class ReviewController {
 
     public Review createReview(@RequestBody CreateReviewRequest request) {
         return reviewService.createReview(request);
+    }
+    @PostMapping("/review/createRandom")
+    public List<Review> createRandomReview() {
+        return reviewService.createRandomReview(100);
     }
 
     @PostMapping("/review/update")

@@ -10,4 +10,5 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
     Review findByText(String text);
     @Transactional
     void deleteTopByOrderByCreatedAtDesc();
+
 }

@@ -5,9 +5,10 @@ import com.example.demo.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
+
 
 @Service
 public class GameService {
@@ -21,17 +22,34 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    public Game generateRandomGame() {
+    public List<Game> generateRandomGames(int numberOfGames) {
+        List<Game> allGame = new ArrayList<>();
+        for (int i = 0; i < numberOfGames; i++) {
+            Game game = new Game();
 
-        Game game = new Game();
-        game.setId(UUID.randomUUID());
+            Random random = new Random();
+            int randomIndex = random.nextInt(possibleTitles.length);
+            String randomTitle = possibleTitles[randomIndex];
 
-        Random random = new Random();
-        int randomIndex = random.nextInt(possibleTitles.length);
-        String randomTitle = possibleTitles[randomIndex];
+            game.setTitle(randomTitle);
+            allGame.add(game);
+        }
+        gameRepository.saveAll(allGame);
 
-        game.setTitle(randomTitle);
-        return game;
+        return allGame;
+    }
+
+    public List<Game> searchGameByPartialForTitle(String partial) {
+
+        List<Game> partialGames = new ArrayList<>();
+        List<Game> games = gameRepository.findAll();
+        for (Game trai : games) {
+            if (trai.getTitle().contains(partial)) {
+                partialGames.add(trai);
+            }
+        }
+        return partialGames;
+
     }
 
     public void saveGame(Game game) {

@@ -12,6 +12,8 @@ import java.util.UUID;
 @Repository
 public interface GameRepository extends JpaRepository<Game, UUID> {
     List<Game> findByTitle(String title);
+
     @Modifying
     void deleteByTitle(String title);
+
 }
